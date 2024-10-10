@@ -54,16 +54,16 @@ const TodoList = () => {
             let updatedTodos;
             if (inputs.id) {
                 const response = await axios.patch(`http://localhost:3001/${inputs.id}`, dataToSend);
-                updatedTodos = todos.map(todo => (todo._id === inputs.id ? response.data.data.tasks : todo)); // Update the edited todo
+                updatedTodos = todos.map(todo => (todo._id === inputs.id ? response.data.data.tasks : todo));
             } else {
                 const response = await axios.post(`http://localhost:3001/`, dataToSend);
                 console.log(response.data.data.tasks);
                 
-                updatedTodos = [...todos, response.data.data.tasks]; // Add the new todo
+                updatedTodos = [...todos, response.data.data.tasks]; 
             }
     
-            // Dispatch success action with updated todos
-            dispatch(fetchTodosSuccess(updatedTodos, total)); // Assuming `total` remains unchanged
+            
+            dispatch(fetchTodosSuccess(updatedTodos, total)); 
     
         } catch (error) {
             dispatch(fetchTodosFailure(`Error in upd/post: ${error.message}`));
